@@ -120,7 +120,7 @@ public class Conexion {
 			ResultSet resultSet = st.executeQuery(query);
 
 			ArrayList<String> registros = new ArrayList<String>();
-			
+
 			while (resultSet.next()) {
 				StringBuilder registro = new StringBuilder();
 
@@ -129,8 +129,38 @@ public class Conexion {
 				}
 				registros.add(registro.toString());
 			}
-			
+
 			return registros;
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
+
+	// Obtiene los datos de un solo registro
+	public String[] obtenerRegistro(String nombreBD, String nombreTabla, String[] listaColumnas, String campo, String valor) {
+		try {
+			String queryDb = "USE " + nombreBD + ";";
+			Statement stdb = conexion.createStatement();
+			stdb.executeUpdate(queryDb);
+			
+			String query = "SELECT * FROM " + nombreTabla + " WHERE " + campo + "= " + valor;
+	        Statement st = conexion.createStatement();
+	        ResultSet resultSet = st.executeQuery(query);
+	        
+	        if (resultSet.next()) {
+	            String[] registro = new String[listaColumnas.length];
+
+	            for (int i = 0; i < listaColumnas.length; i++) {
+	            	registro[i] = resultSet.getString(listaColumnas[i]);
+	            }
+	            return registro;
+	            
+	        } else {
+	            return null;
+	        }
 
 		} catch (Exception e) {
 			System.out.println(e);

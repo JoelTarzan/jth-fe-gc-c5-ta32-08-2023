@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Ejercicio01.views.BuscarClientes;
 import Ejercicio01.views.CrearClientes;
 import Ejercicio01.views.ListarClientes;
 import Ejercicio01.views.MenuClientes;
@@ -67,11 +68,13 @@ public class MenuClientesController {
 	}
 	
 	private void editarCliente() {
-		
+		vista.dispose();
+		new BuscarClientesController(new BuscarClientes(), modelo, "editar");
 	}
 	
 	private void eliminarCliente() {
-		
+		vista.dispose();
+		new BuscarClientesController(new BuscarClientes(), modelo, "eliminar");
 	}
 	
 	private void volver() {
