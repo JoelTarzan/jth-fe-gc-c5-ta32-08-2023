@@ -43,8 +43,11 @@ public class BuscarClientesController {
 			new EditarClientesController(new EditarClientes(registro), modelo);
 			
 		} else if (this.modo == "eliminar") {
+			String queryEliminarCliente = "DELETE FROM clientes WHERE id = '" + registro[0] + "';";
+			modelo.eliminarRegistro("videoclub", queryEliminarCliente);
 			
-			
+			vista.dispose();
+			new MenuClientesController(new MenuClientes(), modelo);
 		}
 	}
 	
