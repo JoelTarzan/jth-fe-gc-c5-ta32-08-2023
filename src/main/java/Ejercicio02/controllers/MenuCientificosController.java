@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Ejercicio02.views.CrearCientifico;
+import Ejercicio02.views.ListarCientificos;
 import Ejercicio02.views.MenuCientificos;
 import Ejercicio02.views.MenuPrincipal;
 import models.Conexion;
@@ -56,12 +58,12 @@ public class MenuCientificosController {
 	private void listarCientificos() {
 		vista.dispose();
 		ArrayList<String> registros = modelo.obtenerDatos(db, tabla, new String[] {"dni", "nom_apels"});
-//		new ListarClientesController(new ListarClientes(registros), modelo);
+		new ListarCientificosController(new ListarCientificos(registros), modelo);
 	}
 
 	private void crearCientifico() {
 		vista.dispose();
-//		new CrearClientesController(new CrearClientes(), modelo);
+		new CrearCientificoController(new CrearCientifico(), modelo);
 	}
 
 	private void editarCientifico() {
