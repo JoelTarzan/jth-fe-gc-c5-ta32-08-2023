@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Ejercicio01.views.BuscarVideos;
 import Ejercicio01.views.CrearClientes;
 import Ejercicio01.views.CrearVideos;
 import Ejercicio01.views.ListarClientes;
@@ -70,11 +71,13 @@ public class MenuVideosController {
 	}
 
 	private void editarVideo() {
-
+		vista.dispose();
+		new BuscarVideosController(new BuscarVideos(), modelo, "editar");
 	}
 
 	private void eliminarVideo() {
-
+		vista.dispose();
+		new BuscarVideosController(new BuscarVideos(), modelo, "eliminar");
 	}
 
 	private void volver() {
