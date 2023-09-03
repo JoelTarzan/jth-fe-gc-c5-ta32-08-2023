@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Ejercicio02.views.CrearAsignacion;
+import Ejercicio02.views.ListarAsignaciones;
 import Ejercicio02.views.MenuAsignaciones;
 import Ejercicio02.views.MenuPrincipal;
 import models.Conexion;
@@ -56,12 +58,14 @@ public class MenuAsignacionesController {
 	private void listarAsignaciones() {
 		vista.dispose();
 		ArrayList<String> registros = modelo.obtenerDatos(db, tabla, new String[] {"id", "cientifico", "proyecto"});
-//		new ListarClientesController(new ListarClientes(registros), modelo);
+		new ListarAsignacionesController(new ListarAsignaciones(registros), modelo);
 	}
 
 	private void crearAsignacion() {
+		ArrayList<String> cientificos = modelo.obtenerCampo(db, "cientificos", "dni");
+		ArrayList<String> proyectos = modelo.obtenerCampo(db, "proyectos", "id");
 		vista.dispose();
-//		new CrearClientesController(new CrearClientes(), modelo);
+		new CrearAsignacionController(new CrearAsignacion(cientificos, proyectos), modelo);
 	}
 
 	private void editarAsignacion() {
