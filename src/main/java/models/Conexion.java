@@ -145,27 +145,53 @@ public class Conexion {
 			String queryDb = "USE " + nombreBD + ";";
 			Statement stdb = conexion.createStatement();
 			stdb.executeUpdate(queryDb);
-			
-			String query = "SELECT * FROM " + nombreTabla + " WHERE " + campo + "= " + valor;
-	        Statement st = conexion.createStatement();
-	        ResultSet resultSet = st.executeQuery(query);
-	        
-	        if (resultSet.next()) {
-	            String[] registro = new String[listaColumnas.length];
 
-	            for (int i = 0; i < listaColumnas.length; i++) {
-	            	registro[i] = resultSet.getString(listaColumnas[i]);
-	            }
-	            return registro;
-	            
-	        } else {
-	            return null;
-	        }
+			String query = "SELECT * FROM " + nombreTabla + " WHERE " + campo + "= " + valor;
+			Statement st = conexion.createStatement();
+			ResultSet resultSet = st.executeQuery(query);
+
+			if (resultSet.next()) {
+				String[] registro = new String[listaColumnas.length];
+
+				for (int i = 0; i < listaColumnas.length; i++) {
+					registro[i] = resultSet.getString(listaColumnas[i]);
+				}
+				return registro;
+
+			} else {
+				return null;
+			}
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
+		return null;
+	}
+
+	// Obtiene los datos de un solo campo de una tabla
+	public ArrayList<String> obtenerCampo(String nombreBD, String nombreTabla, String campo) {
+		try {
+			String queryDb = "USE " + nombreBD + ";";
+			Statement stdb = conexion.createStatement();
+			stdb.executeUpdate(queryDb);
+
+			String query = "SELECT " + campo + " FROM " + nombreTabla + ";";
+			Statement st = conexion.createStatement();
+			ResultSet resultSet = st.executeQuery(query);
+
+			ArrayList<String> datos = new ArrayList<String>();
+
+			while (resultSet.next()) {
+				datos.add(resultSet.getString(campo));
+			}
+			
+			return datos;
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 		return null;
 	}
 

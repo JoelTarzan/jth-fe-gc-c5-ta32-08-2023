@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import Ejercicio01.views.CrearClientes;
+import Ejercicio01.views.CrearVideos;
 import Ejercicio01.views.ListarClientes;
+import Ejercicio01.views.ListarVideos;
 import Ejercicio01.views.MenuPrincipal;
 import Ejercicio01.views.MenuVideos;
 import models.Conexion;
@@ -56,11 +58,15 @@ public class MenuVideosController {
 
 	// Métodos
 	private void listarVideos() {
-
+		vista.dispose();
+		ArrayList<String> registros = modelo.obtenerDatos(db, tabla, new String[] {"Id", "Title", "Director", "Cli_id"});
+		new ListarVideosController(new ListarVideos(registros), modelo);
 	}
 
 	private void crearVideo() {
-
+		vista.dispose();
+		ArrayList<String> idClientes = modelo.obtenerCampo(db, "clientes", "id");
+		new CrearVideosController(new CrearVideos(idClientes), modelo);
 	}
 
 	private void editarVideo() {
