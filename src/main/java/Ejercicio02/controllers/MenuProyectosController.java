@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Ejercicio02.views.BuscarProyecto;
+import Ejercicio02.views.CrearProyecto;
+import Ejercicio02.views.ListarProyectos;
 import Ejercicio02.views.MenuPrincipal;
 import Ejercicio02.views.MenuProyectos;
 import models.Conexion;
@@ -56,22 +59,24 @@ public class MenuProyectosController {
 	private void listarProyectos() {
 		vista.dispose();
 		ArrayList<String> registros = modelo.obtenerDatos(db, tabla, new String[] {"id", "nombre", "horas"});
-//		new ListarClientesController(new ListarClientes(registros), modelo);
+		new ListarProyectosController(new ListarProyectos(registros), modelo);
 	}
 
 	private void crearProyecto() {
 		vista.dispose();
-//		new CrearClientesController(new CrearClientes(), modelo);
+		new CrearProyectoController(new CrearProyecto(), modelo);
 	}
 
 	private void editarProyecto() {
 		vista.dispose();
-//		new BuscarClientesController(new BuscarClientes(), modelo, "editar");
+		ArrayList<String> idProyectos = modelo.obtenerCampo(db, tabla, "id");
+		new BuscarProyectoController(new BuscarProyecto(idProyectos), modelo, "editar");
 	}
 
 	private void eliminarProyecto() {
 		vista.dispose();
-//		new BuscarClientesController(new BuscarClientes(), modelo, "eliminar");
+		ArrayList<String> idProyectos = modelo.obtenerCampo(db, tabla, "id");
+		new BuscarProyectoController(new BuscarProyecto(idProyectos), modelo, "eliminar");
 	}
 
 	private void volver() {

@@ -146,7 +146,7 @@ public class Conexion {
 			Statement stdb = conexion.createStatement();
 			stdb.executeUpdate(queryDb);
 
-			String query = "SELECT * FROM " + nombreTabla + " WHERE " + campo + "= " + valor;
+			String query = "SELECT * FROM " + nombreTabla + " WHERE " + campo + " = " + valor;
 			Statement st = conexion.createStatement();
 			ResultSet resultSet = st.executeQuery(query);
 
@@ -168,6 +168,36 @@ public class Conexion {
 
 		return null;
 	}
+	
+	// Obtiene los datos de un solo registro con like en vez de where
+		public String[] obtenerRegistroConLike(String nombreBD, String nombreTabla, String[] listaColumnas, String campo, String valor) {
+			try {
+				String queryDb = "USE " + nombreBD + ";";
+				Statement stdb = conexion.createStatement();
+				stdb.executeUpdate(queryDb);
+
+				String query = "SELECT * FROM " + nombreTabla + " WHERE "+ campo + " LIKE '" + valor + "'";
+				Statement st = conexion.createStatement();
+				ResultSet resultSet = st.executeQuery(query);
+
+				if (resultSet.next()) {
+					String[] registro = new String[listaColumnas.length];
+
+					for (int i = 0; i < listaColumnas.length; i++) {
+						registro[i] = resultSet.getString(listaColumnas[i]);
+					}
+					return registro;
+
+				} else {
+					return null;
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+			return null;
+		}
 
 	// Obtiene los datos de un solo campo de una tabla
 	public ArrayList<String> obtenerCampo(String nombreBD, String nombreTabla, String campo) {
