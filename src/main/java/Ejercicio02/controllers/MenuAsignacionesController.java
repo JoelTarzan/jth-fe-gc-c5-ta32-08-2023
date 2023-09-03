@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Ejercicio02.views.BuscarAsignacion;
 import Ejercicio02.views.CrearAsignacion;
 import Ejercicio02.views.ListarAsignaciones;
 import Ejercicio02.views.MenuAsignaciones;
@@ -70,12 +71,14 @@ public class MenuAsignacionesController {
 
 	private void editarAsignacion() {
 		vista.dispose();
-//		new BuscarClientesController(new BuscarClientes(), modelo, "editar");
+		ArrayList<String> idAsignaciones = modelo.obtenerCampo(db, tabla, "id");
+		new BuscarAsignacionController(new BuscarAsignacion(idAsignaciones), modelo, "editar");
 	}
 
 	private void eliminarAsignacion() {
 		vista.dispose();
-//		new BuscarClientesController(new BuscarClientes(), modelo, "eliminar");
+		ArrayList<String> idAsignaciones = modelo.obtenerCampo(db, tabla, "id");
+		new BuscarAsignacionController(new BuscarAsignacion(idAsignaciones), modelo, "eliminar");
 	}
 
 	private void volver() {
